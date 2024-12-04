@@ -15,6 +15,7 @@ public class Account {
   @Column(nullable = false)
   private String password;
 
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private Role role;
 }
