@@ -1,17 +1,25 @@
 package com.epam.training.ticketservice.service;
 
-import com.epam.training.ticketservice.dto.AccountDto;
+import com.epam.training.ticketservice.entity.Account;
 
 import java.util.Optional;
 
 public interface AccountService {
-    Optional<AccountDto> login(String username, String password, boolean requirePrivileged);
+    Optional<Account> login(String username, String password);
 
-    Optional<AccountDto> logout();
+    Optional<Account> logout();
 
-    Optional<AccountDto> describe();
+    Optional<Account> getCurrentAccount();
 
-    void registerUser(String username, String password);
+    String describe();
 
-    boolean isPrivileged();
+    boolean registerUser(String username, String password);
+
+    boolean getIsPrivileged();
+
+    void setIsPrivileged(boolean isPrivileged);
+
+    boolean isLoggedIn();
+
+    String getUsername();
 }

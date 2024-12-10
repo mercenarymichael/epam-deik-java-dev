@@ -9,13 +9,17 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import java.util.List;
 
 
 @Entity
@@ -39,4 +43,7 @@ public class Account {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Booking> bookings;
 }

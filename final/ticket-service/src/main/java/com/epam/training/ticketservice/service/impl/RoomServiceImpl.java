@@ -1,7 +1,8 @@
-package com.epam.training.ticketservice.service;
+package com.epam.training.ticketservice.service.impl;
 
 import com.epam.training.ticketservice.entity.Room;
 import com.epam.training.ticketservice.repository.RoomRepository;
+import com.epam.training.ticketservice.service.RoomService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

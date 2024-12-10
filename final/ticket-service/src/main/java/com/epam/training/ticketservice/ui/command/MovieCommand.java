@@ -45,7 +45,7 @@ public class MovieCommand {
     }
 
     private Availability isPrivileged() {
-        return accountService.isPrivileged() ? Availability.available()
+        return accountService.getIsPrivileged() ? Availability.available()
                 :
                 Availability.unavailable("Not admin or not logged in");
     }

@@ -1,10 +1,8 @@
 package com.epam.training.ticketservice.ui.command;
 
-import com.epam.training.ticketservice.entity.Screening;
 import com.epam.training.ticketservice.exception.ScreeningException;
 import com.epam.training.ticketservice.service.AccountService;
 import com.epam.training.ticketservice.service.ScreeningService;
-import lombok.AllArgsConstructor;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -55,7 +53,7 @@ public class ScreeningCommand {
     }
 
     private Availability isPrivileged() {
-        return accountService.isPrivileged() ? Availability.available()
+        return accountService.getIsPrivileged() ? Availability.available()
                 :
                 Availability.unavailable("Not admin or not logged in");
     }

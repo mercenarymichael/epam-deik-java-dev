@@ -1,7 +1,9 @@
-package com.epam.training.ticketservice.service;
+package com.epam.training.ticketservice.service.impl;
 
 import com.epam.training.ticketservice.entity.Movie;
 import com.epam.training.ticketservice.repository.MovieRepository;
+import com.epam.training.ticketservice.service.AccountService;
+import com.epam.training.ticketservice.service.MovieService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

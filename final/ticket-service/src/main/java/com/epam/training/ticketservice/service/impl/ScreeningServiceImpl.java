@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.service;
+package com.epam.training.ticketservice.service.impl;
 
 import com.epam.training.ticketservice.entity.Movie;
 import com.epam.training.ticketservice.entity.Room;
@@ -7,6 +7,7 @@ import com.epam.training.ticketservice.exception.ScreeningException;
 import com.epam.training.ticketservice.repository.MovieRepository;
 import com.epam.training.ticketservice.repository.RoomRepository;
 import com.epam.training.ticketservice.repository.ScreeningRepository;
+import com.epam.training.ticketservice.service.ScreeningService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -53,10 +54,22 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     @Override
     public void deleteScreening(String movieTitle, String roomName, LocalDateTime start) {
+        /*
         Room room = roomRepository.findRoomByName(roomName).orElse(null);
         Movie movie = movieRepository.findMovieByTitle(movieTitle).orElse(null);
         Optional<Screening> screening = screeningRepository.findByRoomAndMovieAndStartDateTime(room, movie, start);
-        screening.ifPresent(screeningRepository::delete);
+         */
+        Screening screening = findScreening(movieTitle, roomName, start);
+        if (screening != null) {
+            screeningRepository.delete(screening);
+        }
+    }
+
+    @Override
+    public Screening findScreening(String movieTitle, String roomName, LocalDateTime start) {
+        Room room = roomRepository.findRoomByName(roomName).orElse(null);
+        Movie movie = movieRepository.findMovieByTitle(movieTitle).orElse(null);
+        return screeningRepository.getByRoomAndMovieAndStartDateTime(room, movie, start);
     }
 
     @Override
