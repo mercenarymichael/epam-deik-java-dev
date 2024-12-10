@@ -1,8 +1,19 @@
 package com.epam.training.ticketservice.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,11 +43,17 @@ public class Movie {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Movie movie = (Movie) o;
-        return id.equals(movie.id) && title.equals(movie.title) && genre.equals(movie.genre) && runtime.equals(movie.runtime) && Objects.equals(screenings, movie.screenings);
+        return id.equals(movie.id) && title.equals(movie.title)
+                && genre.equals(movie.genre) && runtime.equals(movie.runtime)
+                && Objects.equals(screenings, movie.screenings);
     }
 
     @Override
@@ -50,11 +67,6 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", genre='" + genre + '\'' +
-                ", runtime=" + runtime +
-                '}';
+        return title + " (" + genre + ", " + runtime + " minutes)";
     }
 }

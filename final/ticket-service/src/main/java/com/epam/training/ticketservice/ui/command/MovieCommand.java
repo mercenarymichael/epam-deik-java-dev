@@ -8,6 +8,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 
+import java.util.stream.Collectors;
+
 @ShellComponent
 @AllArgsConstructor
 public class MovieCommand {
@@ -20,7 +22,7 @@ public class MovieCommand {
         return movieService.createMovie(title, genre, runtime) ? "Movie created!" : "Movie already exists!";
     }
 
-    @ShellMethod(key = "update movie", value = "Add new movie to database")
+    @ShellMethod(key = "update movie", value = "Update movie specified by title")
     @ShellMethodAvailability("isPrivileged")
     public String updateMovie(String title, String genre, Integer runtime) {
         return movieService.updateMovie(title, genre, runtime) ? "Movie updated!" : "Cannot find movie in database!";
@@ -36,7 +38,9 @@ public class MovieCommand {
     @ShellMethod(key = "list movies", value = "List all movies from database")
     public String listMovies() {
         return movieService.getAllMovies()
-                .map(Object::toString)
+                .map(movies -> movies.stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining("\n")))
                 .orElse("There are no movies at the moment");
     }
 

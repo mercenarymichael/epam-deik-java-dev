@@ -2,8 +2,11 @@ package com.epam.training.ticketservice.dto;
 
 import com.epam.training.ticketservice.entity.Role;
 import lombok.Builder;
+import lombok.Getter;
+
 import java.util.Objects;
 
+@Getter
 @Builder
 public class AccountDto {
     private final String username;
@@ -16,26 +19,18 @@ public class AccountDto {
         this.role = role;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         AccountDto entity = (AccountDto) o;
-        return Objects.equals(this.username, entity.username) &&
-                Objects.equals(this.password, entity.password) &&
-                Objects.equals(this.role, entity.role);
+        return Objects.equals(this.username, entity.username)
+                && Objects.equals(this.password, entity.password)
+                && Objects.equals(this.role, entity.role);
     }
 
     @Override
@@ -45,9 +40,9 @@ public class AccountDto {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "username = " + username + ", " +
-                "password = " + password + ", " +
-                "role = " + role + ")";
+        return getClass().getSimpleName() + "("
+                + "username = " + username + ", "
+                + "password = " + password + ", "
+                + "role = " + role + ")";
     }
 }

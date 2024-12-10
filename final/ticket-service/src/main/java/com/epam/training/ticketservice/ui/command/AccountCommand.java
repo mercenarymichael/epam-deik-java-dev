@@ -29,7 +29,7 @@ public class AccountCommand {
     @ShellMethod(key = "sign out", value = "Signing out from account")
     public String logout() {
         return accountService.logout()
-                .map(accountDto -> "Signed out from account: "+accountDto.getUsername())
+                .map(accountDto -> "Signed out from account: " + accountDto.getUsername())
                 .orElse("You are not signed in");
     }
 

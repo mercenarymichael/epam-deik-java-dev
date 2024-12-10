@@ -25,7 +25,7 @@ public class AccountServiceImpl implements AccountService {
         }
         if (requirePrivileged && !account.get().getRole().equals(Role.ADMIN)) {
             return Optional.empty();
-        } else if(requirePrivileged) {
+        } else if (requirePrivileged) {
             isPrivileged = true;
         }
 
