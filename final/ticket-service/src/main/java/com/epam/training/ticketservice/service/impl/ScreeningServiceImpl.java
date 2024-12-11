@@ -54,11 +54,6 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     @Override
     public void deleteScreening(String movieTitle, String roomName, LocalDateTime start) {
-        /*
-        Room room = roomRepository.findRoomByName(roomName).orElse(null);
-        Movie movie = movieRepository.findMovieByTitle(movieTitle).orElse(null);
-        Optional<Screening> screening = screeningRepository.findByRoomAndMovieAndStartDateTime(room, movie, start);
-         */
         Screening screening = findScreening(movieTitle, roomName, start);
         if (screening != null) {
             screeningRepository.delete(screening);

@@ -46,7 +46,6 @@ public class AccountCommand {
     }
 
     @ShellMethod(key = "describe account", value = "Prints currently logged in account name")
-    @ShellMethodAvailability("isLoggedIn")
     public String describe() {
         if (!accountService.isLoggedIn()) {
             return "You are not signed in";

@@ -30,13 +30,11 @@ public class BookingServiceImpl implements BookingService {
     private final ScreeningService screeningService;
     private final AccountService accountService;
     private final AccountRepository accountRepository;
-    //TODO: CREATE SEAT CLASS INSTEAD USING PAIR
     private List<Pair<Integer, Integer>> seatPairs;
     private List<Booking> bookings;
     private boolean isBookingCompleted = true;
     private int ticketPrice = 1500;
     List<BookedSeat> bookedSeats;
-    private final BookedSeatRepository bookedSeatRepository;
 
     @Override
     @Transactional
@@ -67,22 +65,6 @@ public class BookingServiceImpl implements BookingService {
             bookedSeats.add(bookedSeat);
         }
 
-        //Ezt nem kéri a feladat
-        /*
-        Optional<Booking> existingBooking =
-                bookingRepository.findBookingByScreeningAndAccount(screening, accountService.getCurrentAccount());
-        if (existingBooking.isPresent()) {
-            Booking booking = existingBooking.get();
-            for (BookedSeat bookedSeat : bookedSeats) {
-                bookedSeat.setBooking(booking);
-            }
-            existingBooking.get().getBookedSeats().addAll(bookedSeats);
-            existingBooking.get().setAmount(existingBooking.get().getAmount() + bookedSeats.size() * ticketPrice);
-            bookingRepository.save(existingBooking.get());
-            return printBooking(existingBooking.get());
-        } else {
-        }
-         */
         Account account = accountService.getCurrentAccount().get();
         Booking createBooking = Booking.builder()
                 .screening(screening)
@@ -93,7 +75,6 @@ public class BookingServiceImpl implements BookingService {
 
         for (BookedSeat bookedSeat : bookedSeats) {
             bookedSeat.setBooking(createBooking);
-            //bookedSeatRepository.save(bookedSeat);
         }
         createBooking.getBookedSeats().addAll(bookedSeats);
         bookingRepository.save(createBooking);
@@ -113,7 +94,7 @@ public class BookingServiceImpl implements BookingService {
         }
         return bookings.stream()
                 .anyMatch(booking -> booking.getBookedSeats().stream()
-                        .anyMatch(seat -> seat.getSeatCol() == col || seat.getSeatCol() == row));
+                        .anyMatch(seat -> seat.getSeatCol() == col && seat.getSeatCol() == row));
     }
 
     private void processSeatsString(String seats) throws BookingException {

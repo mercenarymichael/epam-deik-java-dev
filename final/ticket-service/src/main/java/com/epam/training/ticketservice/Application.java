@@ -31,19 +31,5 @@ public class Application {
                 .role(Role.ADMIN)
                 .build());
         System.out.println("Admin account initialized.");
-        /*
-        movieRepository.save(Movie.builder()
-                .title("Alma")
-                .genre("krimi")
-                .runtime(150)
-                .build());
-        movieRepository.save(Movie.builder()
-                .title("Inception")
-                .genre("action")
-                .runtime(200)
-                .build());
-        System.out.println("Movies initialized.");
-        */
-
     }
 }

@@ -10,8 +10,4 @@ import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findBookingByScreening(Screening screening);
-
-    List<Booking> findAllByAccount(Optional<Account> currentAccount);
-
-    Optional<Booking> findBookingByScreeningAndAccount(Screening screening, Optional<Account> currentAccount);
 }

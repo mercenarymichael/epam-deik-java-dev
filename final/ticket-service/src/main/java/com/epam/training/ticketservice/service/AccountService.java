@@ -20,6 +20,4 @@ public interface AccountService {
     void setIsPrivileged(boolean isPrivileged);
 
     boolean isLoggedIn();
-
-    String getUsername();
 }

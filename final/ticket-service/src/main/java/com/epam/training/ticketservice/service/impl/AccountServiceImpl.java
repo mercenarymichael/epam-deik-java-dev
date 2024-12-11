@@ -5,7 +5,6 @@ import com.epam.training.ticketservice.entity.Account;
 import com.epam.training.ticketservice.entity.Booking;
 import com.epam.training.ticketservice.entity.Role;
 import com.epam.training.ticketservice.repository.AccountRepository;
-import com.epam.training.ticketservice.repository.BookingRepository;
 import com.epam.training.ticketservice.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -69,6 +68,7 @@ public class AccountServiceImpl implements AccountService {
             for (Booking booking : loggedInAccount.getBookings()) {
                 sb.append(booking.toString() + "\n");
             }
+            sb.deleteCharAt(sb.length() - 1);
         }
         return sb.toString();
     }
@@ -103,10 +103,5 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean isLoggedIn() {
         return loggedInAccount != null;
-    }
-
-    @Override
-    public String getUsername() {
-        return loggedInAccount.getUsername();
     }
 }
