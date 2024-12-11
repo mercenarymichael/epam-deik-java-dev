@@ -25,11 +25,13 @@ public class Application {
 
     @PostConstruct
     public void loadAdminAccount() {
-        accountRepository.save(Account.builder()
-                .username("admin")
-                .password("admin")
-                .role(Role.ADMIN)
-                .build());
-        System.out.println("Admin account initialized.");
+        if (!accountRepository.existsAccountByUsername("admin")) {
+            accountRepository.save(Account.builder()
+                    .username("admin")
+                    .password("admin")
+                    .role(Role.ADMIN)
+                    .build());
+            System.out.println("Admin account initialized.");
+        }
     }
 }
